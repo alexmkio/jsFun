@@ -4,7 +4,7 @@
 
 ## Order
 
-// Single Datasets
+### Single Datasets
 - [ ] Kitties
 - [ ] Clubs
 - [ ] Mods
@@ -14,7 +14,8 @@
 - [ ] Weather
 - [ ] Nationalparks
 - [ ] Brewery
-// Double Datasets
+
+### Double Datasets
 - [ ] Turing 
 - [ ] Bosses
 - [ ] Astronomy
