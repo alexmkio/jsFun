@@ -5,15 +5,15 @@
 ## Order
 
 ### Single Datasets
-- [ ] Kitties
-- [ ] Clubs
-- [ ] Mods
-- [ ] Cakes
+- [x] Kitties
+- [x] Mods
+- [x] Cakes
 - [ ] Classroom 
 - [ ] Books 
 - [ ] Weather
 - [ ] Nationalparks
 - [ ] Brewery
+- [ ] Clubs
 
 ### Double Datasets
 - [ ] Turing 
