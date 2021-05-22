@@ -236,7 +236,7 @@ describe("PROTOTYPES", () => {
       })
     });
     
-    it.only("sortByCapacity", () => {
+    it("sortByCapacity", () => {
       const e = classPrompts.sortByCapacity();
 
       expect(e).to.deep.equal([{
@@ -307,7 +307,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("Weather prompts", () => {
-    it("getAverageTemps", () => {
+    it.only("getAverageTemps", () => {
       const e = weatherPrompts.getAverageTemps();
 
       expect(e).to.deep.equal([

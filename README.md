@@ -9,7 +9,7 @@
 - [x] Mods
 - [x] Cakes
 - [x] Classroom 
-- [ ] Books 
+- [x] Books 
 - [ ] Weather
 - [ ] Nationalparks
 - [ ] Brewery
@@ -25,3 +25,9 @@
 ## Iron FE order
 
 Beyonce, Harry Potter, marvel, drag race, and Care Bears
+
+### Study
+- [ ] Classroom removeViolence
+
+### Questions
+- [ ] Can I do groceryList w/o a global var?

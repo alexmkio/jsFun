@@ -270,12 +270,6 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    // cakes.map(cake => {
-    //   let rObj = {};
-    //   rObj.flavor = cake.cakeFlavor,
-    //   rObj.inStock = cake.inStock;
-    //   return rObj;
-    // });
     let rObj = {};
     const result = cakes.forEach(cake => {
       cake.toppings.map(topping => {
@@ -393,12 +387,27 @@ const bookPrompts = {
     //   'The Curious Incident of the Dog in the Night - Time', 'The Bell Jar',
     //   'Catch-22', 'Treasure Island']
 
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.reduce((newArray, book) => {
+      if (book.genre !== 'Horror' && book.genre !== 'True Crime') {
+        newArray.push(book.title);
+      }
+      return newArray;
+    }, []);
     return result;
 
+
+    // const result = books.filter(book => {
+    //   return (book.genre !== 'Horror' && book.genre !== 'True Crime');
+    // }).map(book => {
+    //   return book.title;
+    // });
+    // return result;
+
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through books
+    // for every book who's book.genre !== horror || true crime
+    // add to acc
+    // return acc
 
   },
   getNewBooks() {
@@ -409,11 +418,23 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.filter(book => {
+      return (book.published >= 1990 && book.published <= 2009);
+    }).map(book => {
+      let rObj = {};
+      rObj.title = book.title;
+      rObj.year = book.published;
+      return rObj;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through books using filter
+    // if book.published is between 1990 and 2009 return book
+    // then use map to iterate over the returned books
+    // and return each books title and pubslished
+    // with keys of title and year
   }
 
 };
