@@ -307,7 +307,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("Weather prompts", () => {
-    it.only("getAverageTemps", () => {
+    it("getAverageTemps", () => {
       const e = weatherPrompts.getAverageTemps();
 
       expect(e).to.deep.equal([
@@ -333,7 +333,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("National Park Prompts", () => {
-    it("getParkVisitList", () => {
+    it.only("getParkVisitList", () => {
       const e = nationalParksPrompts.getParkVisitList();
 
       expect(e).to.deep.equal({

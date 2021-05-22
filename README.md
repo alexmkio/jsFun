@@ -10,7 +10,7 @@
 - [x] Cakes
 - [x] Classroom 
 - [x] Books 
-- [ ] Weather
+- [x] Weather
 - [ ] Nationalparks
 - [ ] Brewery
 - [ ] Clubs
@@ -28,6 +28,7 @@ Beyonce, Harry Potter, marvel, drag race, and Care Bears
 
 ### Study
 - [ ] Classroom removeViolence
+- [ ] wtf adding index to end of sort findHighestHumidity; also turned an array of objects into one object (no longer nestled inside [])
 
 ### Questions
 - [ ] Can I do groceryList w/o a global var?

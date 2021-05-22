@@ -453,11 +453,29 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // const result = weather.map(town => {
+    //   return (town.temperature.high + town.temperature.low) / 2;
+    // });
+    // return result;
+
+    const result = weather.reduce((newArray, town) => {
+      newArray.push((town.temperature.high + town.temperature.low) / 2);
+      return newArray;
+    }, []);
     return result;
 
+    //why couldn't I just return that line like below?
+    // const result = weather.reduce((newArray, town) => {
+    //   return newArray.push((town.temperature.high + town.temperature.low) / 2);
+    // }, []);
+    // return result;
+
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through weather using map
+    // create an empty array
+    // for every town push the average of town.temperature.high and town.temperature.low
+    // into the empty array
+    // return the array
   },
 
   findSunnySpots() {
@@ -467,11 +485,19 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.filter(town => {
+      return (town.type === 'sunny' || town.type === 'mostly sunny');
+    }).map(town => {
+      return `${town.location} is ${town.type}.`;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through weather using filter?
+    // and for every town who's .type is sunny or mostly sunny
+    // return a string using interpolation
+    // `${town.location} is ${town.type}.`
+    // looking for an array of stings
   },
 
   findHighestHumidity() {
@@ -483,11 +509,13 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.sort((a, b) => b.humidity - a.humidity)[0];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // sort the array by .humidity in ascending order using sort
+    // use slice to return a shallow copy at start index of (array.length-1)
+
 
   }
 };
