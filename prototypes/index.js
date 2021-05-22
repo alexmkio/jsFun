@@ -343,15 +343,16 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    let aObj = {};
+    let aObj = { feCapacity: 0, beCapacity: 0};
     const result = classrooms.map(room => {
       if (room.program === 'FE') {
         aObj.feCapacity += room.capacity;
+        console.log(room.capacity);
       } else {
         aObj.beCapacity += room.capacity;
       }
     });
-    return result;
+    return aObj;
 
     // Annotation:
     // create an empty object
@@ -365,11 +366,12 @@ const classPrompts = {
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => a.capacity - b.capacity);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through classrooms using sort
+    // 
   }
 };
 

@@ -8,7 +8,7 @@
 - [x] Kitties
 - [x] Mods
 - [x] Cakes
-- [ ] Classroom 
+- [x] Classroom 
 - [ ] Books 
 - [ ] Weather
 - [ ] Nationalparks
