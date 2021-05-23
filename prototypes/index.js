@@ -538,11 +538,26 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((newObject, park) => {
+      if (!newObject.parksVisited && !newObject.parksToVisit) {
+        newObject.parksVisited = [];
+        newObject.parksToVisit = [];
+      }
+      if (park.visited) {
+        newObject.parksVisited.push(park.name);
+      } else {
+        newObject.parksToVisit.push(park.name);
+      }
+      return newObject;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through parks with reduce (because they want an object back)
+    // create an object with keys of parksToVisit and parksVisited
+    // with empty arrays assigned to them
+    // if park.visited is true array.parksVisited.push(park)
+    // else array.parksToVisit.push(park)
   },
 
   getParkInEachState() {
@@ -555,11 +570,20 @@ const nationalParksPrompts = {
     // { Florida: 'Everglades' } ]
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.map(park => {
+      let newObj = {};
+      newObj[park.location] = park.name
+      return newObj
+    })
+ 
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through parks using map
+    // let a new object
+    // for each park assign a key to the new object that is the park.location
+    // assigned a value of the park.name
+    // return the object
   },
 
   getParkActivities() {
@@ -578,11 +602,23 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((newArray, park) => {
+      park.activities.forEach(activity => {
+        if (!newArray.includes(activity)) {
+          newArray.push(activity);
+        }
+      });
+      return newArray;
+    }, []);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through parks using reduce
+    // then iterate through each park's .activities using filter
+    // check to see if reduce array includes activity
+    // if it doesn't push it into reduce array
+    // return array
   }
 };
 

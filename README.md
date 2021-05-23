@@ -11,7 +11,7 @@
 - [x] Classroom 
 - [x] Books 
 - [x] Weather
-- [ ] Nationalparks
+- [x] Nationalparks
 - [ ] Brewery
 - [ ] Clubs
 
@@ -29,6 +29,7 @@ Beyonce, Harry Potter, marvel, drag race, and Care Bears
 ### Study
 - [ ] Classroom removeViolence
 - [ ] wtf adding index to end of sort findHighestHumidity; also turned an array of objects into one object (no longer nestled inside [])
+- [ ] pretty proud of national parks.getParkVisitList
 
 ### Questions
 - [ ] Can I do groceryList w/o a global var?
