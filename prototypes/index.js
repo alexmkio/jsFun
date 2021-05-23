@@ -572,9 +572,9 @@ const nationalParksPrompts = {
 
     const result = nationalParks.map(park => {
       let newObj = {};
-      newObj[park.location] = park.name
-      return newObj
-    })
+      newObj[park.location] = park.name;
+      return newObj;
+    });
  
     return result;
 
@@ -641,11 +641,16 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, brewery) => {
+      return acc + brewery.beers.length
+    }, 0);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Iterate through breweries using reduce
+    // add each breweries' beers.length to the acc
+    // return the acc
   },
 
   getBreweryBeerCount() {
@@ -657,11 +662,21 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.map(brewery => {
+      let newObj = {};
+      newObj.name = brewery.name,
+      newObj.beerCount = brewery.beers.length;
+      return newObj;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through breweries using map
+    // let a new empty object
+    // for each brewery assign .name to a key of name,
+    // and .beers.length to a key of beerCount
+    // return the object
   },
 
   findHighestAbvBeer() {
@@ -670,6 +685,7 @@ const breweryPrompts = {
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
+    console.log(result)
     return result;
 
     // Annotation:
