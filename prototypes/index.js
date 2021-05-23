@@ -117,12 +117,11 @@ const clubPrompts = {
         if (!newObj[member]) {
           newObj[member] = [];
         }
-        newObj[member].push(currentClub.club)
-      })
-      return newObj
-    }, {})
+        newObj[member].push(currentClub.club);
+      });
+      return newObj;
+    }, {});
 
-    console.log(result)
     return result;
 
     // Annotation:
@@ -713,7 +712,7 @@ const breweryPrompts = {
 
     const result = breweries
       .map(brewery => brewery.beers.sort((a, b) => b.abv - a.abv)[0])
-      .sort((a, b) => b.abv - a.abv)[0]
+      .sort((a, b) => b.abv - a.abv)[0];
 
     return result;
 
@@ -768,11 +767,49 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // const result = instructors.map(instructor => {
+    //   let newObj = {};
+    //   cohorts.find(cohort => {
+    //     cohort.module === instructor.module
+    //     console.log('INSTRUCTOR', instructor.module)
+    //     console.log('COHORT', cohort.module)
+    //     newObj.name = instructor.name,
+    //     newObj.studentCount = cohort.studentCount
+    //   })
+    //   return newObj;
+    // })
+    // console.log(result)
+    // return result;
+
+
+    const result = instructors.map(instructor => {
+      let newObj = {};
+      newObj.name = instructor.name,
+      cohorts.forEach(cohort => {
+        if (cohort.module === instructor.module) {
+          newObj.studentCount = cohort.studentCount;
+        }
+      });
+      return newObj;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // return an array of objects
+    // with a key of name assigned to instructors[].name
+    // and another key of studentCount assigned to cohorts[].studentCount
+    // the thing that both arrays share is a key of .module
+
+    // iterate through instructors using map
+    // iterate through cohorts using find
+    // find the cohort.module === instructor[].module
+    // return that object
+
+    // let newObj = {}
+    // newObj.name = instructor[].name,
+    // newObj.studentCount = cohort.studentCount
+    // return newObj
   },
 
   studentsPerInstructor() {
