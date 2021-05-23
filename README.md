@@ -12,8 +12,8 @@
 - [x] Books 
 - [x] Weather
 - [x] Nationalparks
-- [ ] Brewery
-- [ ] Clubs
+- [x] Brewery
+- [x] Clubs
 
 ### Double Datasets
 - [ ] Turing 
@@ -30,6 +30,9 @@ Beyonce, Harry Potter, marvel, drag race, and Care Bears
 - [ ] Classroom removeViolence
 - [ ] wtf adding index to end of sort findHighestHumidity; also turned an array of objects into one object (no longer nestled inside [])
 - [ ] pretty proud of national parks.getParkVisitList
+- [ ] ugh findHighestAbvBeer .sort2, less {}
+
+- [ ] in clubs I used reduce to avoid declaring a global variable (newObj = {}) as in the example using map above it
 
 ### Questions
 - [ ] Can I do groceryList w/o a global var?

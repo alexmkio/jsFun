@@ -72,7 +72,7 @@ describe("PROTOTYPES", () => {
   });
   
   describe("Club Prompts", () => {
-    it("membersBelongingToClubs", () => {
+    it.only("membersBelongingToClubs", () => {
       const e = clubPrompts.membersBelongingToClubs({
         Louisa: ["Drama", "Art"],
         Pam: ["Drama", "Chess", "Newspaper"],
@@ -402,7 +402,7 @@ describe("PROTOTYPES", () => {
       }])
     });
     
-    it.only("findHighestAbvBeer", () => {
+    it("findHighestAbvBeer", () => {
       const e = breweryPrompts.findHighestAbvBeer();
 
       expect(e).to.deep.equal({

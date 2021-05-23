@@ -101,12 +101,39 @@ const clubPrompts = {
     //   Pam: ['Drama', 'Art', 'Chess'],
     //   ...etc
     // }
+    // let newObj = {};
+    // const result = clubs.map(club => {
+    //   club.members.forEach(member => {
+    //     if (!newObj[member]) {
+    //       newObj[member] = [];
+    //     }
+    //     newObj[member].push(club.club)
+    //   })
+    // })
+    // return newObj;
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = clubs.reduce((newObj, currentClub) => {
+      currentClub.members.forEach(member => {
+        if (!newObj[member]) {
+          newObj[member] = [];
+        }
+        newObj[member].push(currentClub.club)
+      })
+      return newObj
+    }, {})
+
+    console.log(result)
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // i dunno
+    // iterate through clubs with map
+    // let a new empty object
+    // iterate through club.members
+    // if emptyObject[member] doesn't exist
+    // create the key and assign an empty array to it
+
+    // push club.club into each array
   }
 };
 
@@ -642,7 +669,7 @@ const breweryPrompts = {
     // 40
 
     const result = breweries.reduce((acc, brewery) => {
-      return acc + brewery.beers.length
+      return acc + brewery.beers.length;
     }, 0);
 
     return result;
@@ -684,12 +711,20 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    console.log(result)
+    const result = breweries
+      .map(brewery => brewery.beers.sort((a, b) => b.abv - a.abv)[0])
+      .sort((a, b) => b.abv - a.abv)[0]
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I want to create an array of all the objects in beers of each brewery
+    // and then sort them in descending order of .abv and return the one at 0 index
+    // because that will be the beer with the highest abv
+
+    // use filter on breweries
+    // then reduce on beers
+    // then sort()[0]
   }
 };
 
