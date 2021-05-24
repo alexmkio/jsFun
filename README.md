@@ -16,7 +16,7 @@
 - [x] Clubs
 
 ### Double Datasets
-- [ ] Turing 
+- [x] Turing 
 - [ ] Bosses
 - [ ] Astronomy
 - [ ] Ultima

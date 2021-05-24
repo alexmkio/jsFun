@@ -841,11 +841,30 @@ const turingPrompts = {
     //     Will: [1, 2, 3, 4]
     //   }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((newObj, currentInstructor) => {
+      newObj[currentInstructor.name] = [];
+      currentInstructor.teaches.forEach(skill => {
+        cohorts.forEach(cohort => {
+          if (cohort.curriculum.includes(skill)) {
+            if (!newObj[currentInstructor.name].includes(cohort.module)) {
+              newObj[currentInstructor.name].push(cohort.module);
+            }
+          }
+        });
+      });
+      newObj[currentInstructor.name].sort((a, b) => a - b);
+      return newObj;
+    }, {});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through instructors using reduce to create a new object
+    // create keys for each instructor.name
+    // iterate through instructor.teaches (skill)
+    // iterate through cohorts
+    // if cohort.curriculum.includes skill
+    // then newObj[currentInstructor.name].push cohort.module
   },
 
   curriculumPerTeacher() {
@@ -858,11 +877,30 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((newObj, currentInstructor) => {
+      cohorts.forEach(cohort => {
+        cohort.curriculum.forEach(topic => {
+          if (!newObj[topic]) {
+            newObj[topic] = [];
+          }
+        });
+      });
+      currentInstructor.teaches.forEach(skill => {
+        newObj[skill].push(currentInstructor.name);
+      });
+      return newObj;
+    }, {});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through cohorts with reduce creating a new object
+    // iterate through .curriculum
+    // if newObject[topic] doesn't exist create it with an empty array assigned to it
+    // iterate through instructors
+    // iterate through teaches
+    // newObject[skill].push instructor.name
+    // return that mofo
   }
 };
 
