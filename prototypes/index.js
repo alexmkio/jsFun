@@ -999,11 +999,21 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = constellations.reduce((newArray, currentConstellation) => {
+      stars.find(star => star.name === starName)
+
+      currentConstellation.stars.forEach(starName => {
+        stars.find(star => star.name === starName)
+      })
+      return newArray
+    }, [])
+    console.log(result)
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through constellations using reduce to create a new array
+    //iterate through stars using find to return a matching object
+    //use forEach to iterate through constellation.stars
   },
 
   starsByColor() {

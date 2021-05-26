@@ -495,7 +495,7 @@ describe("PROTOTYPES", () => {
   });
   
   describe("Boss Prompts", () => {
-    it.only("bossLoyalty", () => {
+    it("bossLoyalty", () => {
       const e = bossPrompts.bossLoyalty();
 
       expect(e).to.deep.equal([{
@@ -512,7 +512,7 @@ describe("PROTOTYPES", () => {
   });
   
   describe("Astronomy Prompts", () => {
-    it("starsInConstellations", () => {
+    it.only("starsInConstellations", () => {
       const e = astronomyPrompts.starsInConstellations();
 
       expect(e).to.deep.equal([{
