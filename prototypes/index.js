@@ -926,16 +926,42 @@ const bossPrompts = {
     // Create an array of objects that each have the name of the boss and the sum
     // loyalty of all their sidekicks. e.g.:
     // [
-    //   { bossName: 'Jafar', sidekickLoyalty: 3 },
-    //   { bossName: 'Ursula', sidekickLoyalty: 20 },
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
+    //   { bossName: 'Ursula', sidekickLoyalty: 20 },
+    //   { bossName: 'Jafar', sidekickLoyalty: 3 },
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = Object.values(bosses).map(leader => {
+      return {
+        bossName: leader.name,
+        sidekickLoyalty: sidekicks.reduce((sum, sidekick) => {
+          if (sidekick.boss === leader.name) {
+            sum += sidekick.loyaltyToBoss;
+          }
+          return sum;
+        }, 0)
+      };
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // reverse the order of bosses
+    // iterate through bosses using reduce to create an array of objects
+    // with a key of bossName assigned to boss.name
+    // and a key of sidekickLoyalty assigned to
+    // the accumulation of sidekick.loyaltyToBoss
+    // which have a sidekick.boss === boss.name
+
+    // within reduce let a new empty object
+    // use a forEach to get into sidekicks
+
+    // if sidekick.boss === boss.name
+
+    // if (Obj.bossName = sidekick.boss) doesn't exist
+    // create it
+
+    // sidekickLoyalty += sidekick.loyaltyToBoss
   }
 };
 
