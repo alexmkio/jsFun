@@ -999,15 +999,16 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    // const result = Object.values(constellations).reduce((newArray, currentConstellation) => {
+    const result = stars.reduce((newArray, currentStar) => {
+      Object.values(constellations).forEach(currentConstellation => {
+        if (currentConstellation.stars.includes(currentStar.name)) {
+          newArray.push(currentStar);
+        }
+      });
+      return newArray;
+    }, []);
 
-    //   currentConstellation.stars.forEach(starName => {
-    //     return stars.filter(star => star.name === starName)
-    //   })
-    //   return newArray
-    // }, [])
-    // console.log(result)
-    // return result;
+    return result;
 
     // Annotation:
     // iterate through constellations using reduce to create a new array
@@ -1066,11 +1067,23 @@ const astronomyPrompts = {
     //    "The Little Dipper" ]
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const sorted = stars.sort((a, b) => a.visualMagnitude - b.visualMagnitude);
+
+    const result = sorted.reduce((newArray, currentStar) => {
+      if (currentStar.constellation) {
+        newArray.push(currentStar.constellation);
+      }
+      return newArray;
+    }, []);
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of star objects
+    // and I want an array of ordered star.constellation stings
+    // the order must be in regards to their visualMagnitude
+
+    // use sort
   }
 };
 
