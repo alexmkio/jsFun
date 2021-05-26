@@ -33,6 +33,7 @@ Beyonce, Harry Potter, marvel, drag race, and Care Bears
 - [ ] ugh findHighestAbvBeer .sort2, less {}
 - [ ] in clubs I used reduce to avoid declaring a global variable (newObj = {}) as in the example using map above it
 - [ ] look at mentors solution for Bosses - uses Object.values() to turn an object of objects into an array of objects, .map return {} to return an array of objects, and then key = array.reduce() acc being 0 to add up all the sidekick.boss === leader.name matches
+- [ ] go back to starsInConstellations
 
 ### Questions
 - [ ] Can I do groceryList w/o a global var?

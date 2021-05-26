@@ -999,16 +999,15 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    const result = constellations.reduce((newArray, currentConstellation) => {
-      stars.find(star => star.name === starName)
+    // const result = Object.values(constellations).reduce((newArray, currentConstellation) => {
 
-      currentConstellation.stars.forEach(starName => {
-        stars.find(star => star.name === starName)
-      })
-      return newArray
-    }, [])
-    console.log(result)
-    return result;
+    //   currentConstellation.stars.forEach(starName => {
+    //     return stars.filter(star => star.name === starName)
+    //   })
+    //   return newArray
+    // }, [])
+    // console.log(result)
+    // return result;
 
     // Annotation:
     // iterate through constellations using reduce to create a new array
@@ -1027,11 +1026,29 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.reduce((newObj, currentStar) => {
+      if (!newObj[currentStar.color]) {
+        newObj[currentStar.color] = [];
+      }
+      newObj[currentStar.color].push(currentStar);
+      return newObj;
+    }, {});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects
+    // I want an object with keys equal to star.color
+    // that is assigned an array of objects that have star.color matching obj.key
+
+    // use reduce to create a newObj and iterate through stars
+
+    // use an if statement to create the key:
+    // if object[key] of star.color doesn't exist
+    // make it and assign it an empty array
+
+    // push star into object[star.color]
+    // profit
   },
 
   constellationsStarsExistIn() {
