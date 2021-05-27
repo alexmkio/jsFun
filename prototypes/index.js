@@ -605,30 +605,37 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((newObj, currentPark) => {
+      if (!newObj.parksToVisit && !newObj.parksVisited) {
+        newObj.parksToVisit = [];
+        newObj.parksVisited = [];
+      }
+      if (currentPark.visited) {
+        newObj.parksVisited.push(currentPark.name);
+      } else {
+        newObj.parksToVisit.push(currentPark.name);
+      }
+      return newObj;
+    }, {});
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects
+    // I want an object with two keys
+    // the first key (parksToVisit) is an array of park.name strings of the parks that have park.visited false
+    // the 2nd key (parksVisited) same thing but parks.visited is true
+
+    // use reduce to iterate through parks and instantiate an empty object
+    // create the keys with empty arrays assigned to them
+
+    // if() park.visited === true
+    // object.parksVisited.push park.name
+
+    // else
+    // object.parksToVisit.push park.name
   },
-
-  getParkInEachState() {
-    // Return an array of objects where the key is the state and the value is its National Park
-    // eg: [ { Colorado: 'Rocky Mountain' },
-    // { Wyoming: 'Yellowstone' },
-    // { Montana: 'Glacier' },
-    // { Maine: 'Acadia' },
-    // { Utah: 'Zion' },
-    // { Florida: 'Everglades' } ]
-
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
-  },
-
+  
   getParkActivities() {
     // Return an array of all the activities I can do
     // in a National Park. Make sure to exclude duplicates. eg:
@@ -645,11 +652,54 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((newArray, currentPark) => {
+      currentPark.activities.forEach(activity => {
+        if (!newArray.includes(activity)) {
+          newArray.push(activity);
+        }
+      });
+      return newArray;
+    }, []);
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of park objects
+    // I want an array of strings from each park.activities without duplication
+
+    // use reduce to iterate through parks and instantiate an empty array
+    // use forEach to iterate through each park.activities
+    // if() newarray doesn't INCLUDE park.activity
+    // push it into newarray
+    // return newarray
+  },
+  
+  getParkInEachState() {
+    // Return an array of objects where the key is the state and the value is its National Park
+    // eg: [ { Colorado: 'Rocky Mountain' },
+    // { Wyoming: 'Yellowstone' },
+    // { Montana: 'Glacier' },
+    // { Maine: 'Acadia' },
+    // { Utah: 'Zion' },
+    // { Florida: 'Everglades' } ]
+
+
+    const result = nationalParks.map(currentPark => {
+      let newObj = {};
+      newObj[currentPark.location] = currentPark.name;
+      return newObj;
+    });
+    
+    return result;
+
+    // Annotation:
+    // I have an array of park objects
+    // I want an array of the same length
+    // of modified park odjects
+
+    // use map to iterate through parks and return an array
+    // for each park return an object with a key of [park.location]
+    // and assign it a value of park.name
   }
 };
 
