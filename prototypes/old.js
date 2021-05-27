@@ -27,17 +27,18 @@ const kittyPrompts = {
 
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
-    const result = kitties.reduce((newArray, currentKitten) => {
-      if (currentKitten.color === 'orange') {
-        newArray.push(currentKitten.name);
+    const result = kitties.reduce((newArray, kitty) => {
+      if (kitty.color === 'orange') {
+        newArray.push(kitty.name);
       }
       return newArray;
     }, []);
-    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through kitties  --> reduce()
+    // if kitty.color is orange
+    // push kitty.name into array
   },
 
   sortByAge() {
@@ -47,9 +48,8 @@ const kittyPrompts = {
     return result;
 
     // Annotation:
-    // I have an array of objects and
-    // I want a sorted array of objects
-    // use sort to sort cat.age in descending order
+    // iterate through kitties and sort my age --> sort()
+    // oldest to youngest
   },
 
   growUp() {
@@ -66,18 +66,12 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    const result = kitties.map(currentCat => {
-      currentCat.age += 2;
-      return currentCat;
-    }).sort((a, b) => b.age - a.age);
-    
+    const result = kitties.sort((a, b) => b.age - a.age);
+    result.forEach(kitty => kitty.age = kitty.age + 2);
     return result;
 
-    // I have an array of objects
-    // and I want back an ordered array of objects
-    // in which all the cat.ages have increased by 2 --> map?
-    // and they are sorted cat.age in descending order
-
+    // sort kitties oldest to youngest --> sort()
+    // iterate through and increase kitty.age by 2
   }
 };
 
@@ -107,6 +101,16 @@ const clubPrompts = {
     //   Pam: ['Drama', 'Art', 'Chess'],
     //   ...etc
     // }
+    // let newObj = {};
+    // const result = clubs.map(club => {
+    //   club.members.forEach(member => {
+    //     if (!newObj[member]) {
+    //       newObj[member] = [];
+    //     }
+    //     newObj[member].push(club.club)
+    //   })
+    // })
+    // return newObj;
 
     const result = clubs.reduce((newObj, currentClub) => {
       currentClub.members.forEach(member => {
@@ -117,22 +121,18 @@ const clubPrompts = {
       });
       return newObj;
     }, {});
-    
+
     return result;
 
     // Annotation:
-    // I have an array of objects
+    // i dunno
+    // iterate through clubs with map
+    // let a new empty object
+    // iterate through club.members
+    // if emptyObject[member] doesn't exist
+    // create the key and assign an empty array to it
 
-    // I want an object
-    // with keysnames === club.member
-
-    // use reduce to instantiate an empty object
-    // use forEach to iterate through members
-    // if() object[club.member] doesn't exist
-    // create it and assign an empty array to it
-
-    // object[club.member].push club.club
-
+    // push club.club into each array
   }
 };
 
@@ -164,11 +164,18 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.map(mod => {
+      let rObj = {};
+      rObj.mod = mod.mod,
+      rObj.studentsPerInstructor = (mod.students / mod.instructors);
+      return rObj;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Create a new array of objects
+    // first key and value are the same
+    // second key is studentsPerInstructor whos value is mod.students/mod.instructors
   }
 };
 
@@ -199,11 +206,18 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map(cake => {
+      let rObj = {};
+      rObj.flavor = cake.cakeFlavor,
+      rObj.inStock = cake.inStock;
+      return rObj;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through cakes return an array of objects --> map()
+    // that have key of flavor with value cake.cakeFlavor,
+    // and another key of inStock with a value of cake.inStock
   },
 
   onlyInStock() {
@@ -227,22 +241,26 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter(cake => cake.inStock > 0);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through cakes using filter
+    // push each cake that has a cake.inStock value greater than 0 into acc
   },
 
   totalInventory() {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((accumulator, cake) => {
+      return accumulator + cake.inStock;
+    }, 0);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through cakes using reduce
+    // add each cake.inStock to the acc
   },
 
   allToppings() {
@@ -250,11 +268,21 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [];
+    cakes.forEach(cake => {
+      cake.toppings.forEach(topping => {
+        if (!result.includes(topping)) {
+          result.push(topping);
+        }
+      });
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // create an empty array
+    // iterate through cakes
+    // iterate through each cake.toppings
+    // if empty array !doesn't include cake.topping push it
   },
 
   groceryList() {
@@ -268,11 +296,27 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    let rObj = {};
+    const result = cakes.forEach(cake => {
+      cake.toppings.map(topping => {
+        if (!rObj[topping]) {
+          rObj[topping] = 1;
+          return rObj;
+        } else {
+          rObj[topping]++;
+          return rObj;
+        }
+      });
+    });
+    return rObj;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // make empty object
+    // iterate through cakes --> forEach?
+    // iterate through toppings --> map?
+    // does empty object have a key of topping?
+    // if yes increment value by 1
+    // if no create key with value of 1
   }
 };
 
@@ -303,11 +347,12 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter(room => room.program === 'FE');
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through classrooms with --> filter
+    // filter only for rooms with .program = 'FE'
   },
 
   totalCapacities() {
@@ -318,21 +363,35 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    let aObj = { feCapacity: 0, beCapacity: 0};
+    const result = classrooms.map(room => {
+      if (room.program === 'FE') {
+        aObj.feCapacity += room.capacity;
+        console.log(room.capacity);
+      } else {
+        aObj.beCapacity += room.capacity;
+      }
+    });
+    return aObj;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // create an empty object
+    // iterate through classrooms using map
+    // if room.program === 'FE'
+    // object.feCapacity += room.capacity
+    // else
+    // object.beCapacity += room.capacity
   },
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => a.capacity - b.capacity);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through classrooms using sort
+    // 
   }
 };
 
@@ -354,12 +413,27 @@ const bookPrompts = {
     //   'The Curious Incident of the Dog in the Night - Time', 'The Bell Jar',
     //   'Catch-22', 'Treasure Island']
 
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.reduce((newArray, book) => {
+      if (book.genre !== 'Horror' && book.genre !== 'True Crime') {
+        newArray.push(book.title);
+      }
+      return newArray;
+    }, []);
     return result;
 
+
+    // const result = books.filter(book => {
+    //   return (book.genre !== 'Horror' && book.genre !== 'True Crime');
+    // }).map(book => {
+    //   return book.title;
+    // });
+    // return result;
+
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through books
+    // for every book who's book.genre !== horror || true crime
+    // add to acc
+    // return acc
 
   },
   getNewBooks() {
@@ -370,11 +444,23 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.filter(book => {
+      return (book.published >= 1990 && book.published <= 2009);
+    }).map(book => {
+      let rObj = {};
+      rObj.title = book.title;
+      rObj.year = book.published;
+      return rObj;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through books using filter
+    // if book.published is between 1990 and 2009 return book
+    // then use map to iterate over the returned books
+    // and return each books title and pubslished
+    // with keys of title and year
   }
 
 };
@@ -393,11 +479,29 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // const result = weather.map(town => {
+    //   return (town.temperature.high + town.temperature.low) / 2;
+    // });
+    // return result;
+
+    const result = weather.reduce((newArray, town) => {
+      newArray.push((town.temperature.high + town.temperature.low) / 2);
+      return newArray;
+    }, []);
     return result;
 
+    //why couldn't I just return that line like below?
+    // const result = weather.reduce((newArray, town) => {
+    //   return newArray.push((town.temperature.high + town.temperature.low) / 2);
+    // }, []);
+    // return result;
+
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through weather using map
+    // create an empty array
+    // for every town push the average of town.temperature.high and town.temperature.low
+    // into the empty array
+    // return the array
   },
 
   findSunnySpots() {
@@ -407,11 +511,19 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.filter(town => {
+      return (town.type === 'sunny' || town.type === 'mostly sunny');
+    }).map(town => {
+      return `${town.location} is ${town.type}.`;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through weather using filter?
+    // and for every town who's .type is sunny or mostly sunny
+    // return a string using interpolation
+    // `${town.location} is ${town.type}.`
+    // looking for an array of stings
   },
 
   findHighestHumidity() {
@@ -423,11 +535,13 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.sort((a, b) => b.humidity - a.humidity)[0];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // sort the array by .humidity in ascending order using sort
+    // use slice to return a shallow copy at start index of (array.length-1)
+
 
   }
 };
@@ -450,11 +564,26 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((newObject, park) => {
+      if (!newObject.parksVisited && !newObject.parksToVisit) {
+        newObject.parksVisited = [];
+        newObject.parksToVisit = [];
+      }
+      if (park.visited) {
+        newObject.parksVisited.push(park.name);
+      } else {
+        newObject.parksToVisit.push(park.name);
+      }
+      return newObject;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through parks with reduce (because they want an object back)
+    // create an object with keys of parksToVisit and parksVisited
+    // with empty arrays assigned to them
+    // if park.visited is true array.parksVisited.push(park)
+    // else array.parksToVisit.push(park)
   },
 
   getParkInEachState() {
@@ -467,11 +596,20 @@ const nationalParksPrompts = {
     // { Florida: 'Everglades' } ]
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.map(park => {
+      let newObj = {};
+      newObj[park.location] = park.name;
+      return newObj;
+    });
+ 
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through parks using map
+    // let a new object
+    // for each park assign a key to the new object that is the park.location
+    // assigned a value of the park.name
+    // return the object
   },
 
   getParkActivities() {
@@ -490,11 +628,23 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((newArray, park) => {
+      park.activities.forEach(activity => {
+        if (!newArray.includes(activity)) {
+          newArray.push(activity);
+        }
+      });
+      return newArray;
+    }, []);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through parks using reduce
+    // then iterate through each park's .activities using filter
+    // check to see if reduce array includes activity
+    // if it doesn't push it into reduce array
+    // return array
   }
 };
 
@@ -517,11 +667,16 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, brewery) => {
+      return acc + brewery.beers.length;
+    }, 0);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Iterate through breweries using reduce
+    // add each breweries' beers.length to the acc
+    // return the acc
   },
 
   getBreweryBeerCount() {
@@ -533,11 +688,21 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.map(brewery => {
+      let newObj = {};
+      newObj.name = brewery.name,
+      newObj.beerCount = brewery.beers.length;
+      return newObj;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through breweries using map
+    // let a new empty object
+    // for each brewery assign .name to a key of name,
+    // and .beers.length to a key of beerCount
+    // return the object
   },
 
   findHighestAbvBeer() {
@@ -545,11 +710,20 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries
+      .map(brewery => brewery.beers.sort((a, b) => b.abv - a.abv)[0])
+      .sort((a, b) => b.abv - a.abv)[0];
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I want to create an array of all the objects in beers of each brewery
+    // and then sort them in descending order of .abv and return the one at 0 index
+    // because that will be the beer with the highest abv
+
+    // use filter on breweries
+    // then reduce on beers
+    // then sort()[0]
   }
 };
 
@@ -593,11 +767,49 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // const result = instructors.map(instructor => {
+    //   let newObj = {};
+    //   cohorts.find(cohort => {
+    //     cohort.module === instructor.module
+    //     console.log('INSTRUCTOR', instructor.module)
+    //     console.log('COHORT', cohort.module)
+    //     newObj.name = instructor.name,
+    //     newObj.studentCount = cohort.studentCount
+    //   })
+    //   return newObj;
+    // })
+    // console.log(result)
+    // return result;
+
+
+    const result = instructors.map(instructor => {
+      let newObj = {};
+      newObj.name = instructor.name,
+      cohorts.forEach(cohort => {
+        if (cohort.module === instructor.module) {
+          newObj.studentCount = cohort.studentCount;
+        }
+      });
+      return newObj;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // return an array of objects
+    // with a key of name assigned to instructors[].name
+    // and another key of studentCount assigned to cohorts[].studentCount
+    // the thing that both arrays share is a key of .module
+
+    // iterate through instructors using map
+    // iterate through cohorts using find
+    // find the cohort.module === instructor[].module
+    // return that object
+
+    // let newObj = {}
+    // newObj.name = instructor[].name,
+    // newObj.studentCount = cohort.studentCount
+    // return newObj
   },
 
   studentsPerInstructor() {
@@ -629,11 +841,30 @@ const turingPrompts = {
     //     Will: [1, 2, 3, 4]
     //   }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((newObj, currentInstructor) => {
+      newObj[currentInstructor.name] = [];
+      currentInstructor.teaches.forEach(skill => {
+        cohorts.forEach(cohort => {
+          if (cohort.curriculum.includes(skill)) {
+            if (!newObj[currentInstructor.name].includes(cohort.module)) {
+              newObj[currentInstructor.name].push(cohort.module);
+            }
+          }
+        });
+      });
+      newObj[currentInstructor.name].sort((a, b) => a - b);
+      return newObj;
+    }, {});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through instructors using reduce to create a new object
+    // create keys for each instructor.name
+    // iterate through instructor.teaches (skill)
+    // iterate through cohorts
+    // if cohort.curriculum.includes skill
+    // then newObj[currentInstructor.name].push cohort.module
   },
 
   curriculumPerTeacher() {
@@ -646,11 +877,30 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((newObj, currentInstructor) => {
+      cohorts.forEach(cohort => {
+        cohort.curriculum.forEach(topic => {
+          if (!newObj[topic]) {
+            newObj[topic] = [];
+          }
+        });
+      });
+      currentInstructor.teaches.forEach(skill => {
+        newObj[skill].push(currentInstructor.name);
+      });
+      return newObj;
+    }, {});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through cohorts with reduce creating a new object
+    // iterate through .curriculum
+    // if newObject[topic] doesn't exist create it with an empty array assigned to it
+    // iterate through instructors
+    // iterate through teaches
+    // newObject[skill].push instructor.name
+    // return that mofo
   }
 };
 
@@ -676,16 +926,42 @@ const bossPrompts = {
     // Create an array of objects that each have the name of the boss and the sum
     // loyalty of all their sidekicks. e.g.:
     // [
-    //   { bossName: 'Jafar', sidekickLoyalty: 3 },
-    //   { bossName: 'Ursula', sidekickLoyalty: 20 },
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
+    //   { bossName: 'Ursula', sidekickLoyalty: 20 },
+    //   { bossName: 'Jafar', sidekickLoyalty: 3 },
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = Object.values(bosses).map(leader => {
+      return {
+        bossName: leader.name,
+        sidekickLoyalty: sidekicks.reduce((sum, sidekick) => {
+          if (sidekick.boss === leader.name) {
+            sum += sidekick.loyaltyToBoss;
+          }
+          return sum;
+        }, 0)
+      };
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // reverse the order of bosses
+    // iterate through bosses using reduce to create an array of objects
+    // with a key of bossName assigned to boss.name
+    // and a key of sidekickLoyalty assigned to
+    // the accumulation of sidekick.loyaltyToBoss
+    // which have a sidekick.boss === boss.name
+
+    // within reduce let a new empty object
+    // use a forEach to get into sidekicks
+
+    // if sidekick.boss === boss.name
+
+    // if (Obj.bossName = sidekick.boss) doesn't exist
+    // create it
+
+    // sidekickLoyalty += sidekick.loyaltyToBoss
   }
 };
 
@@ -723,11 +999,21 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.reduce((newArray, currentStar) => {
+      Object.values(constellations).forEach(currentConstellation => {
+        if (currentConstellation.stars.includes(currentStar.name)) {
+          newArray.push(currentStar);
+        }
+      });
+      return newArray;
+    }, []);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through constellations using reduce to create a new array
+    //iterate through stars using find to return a matching object
+    //use forEach to iterate through constellation.stars
   },
 
   starsByColor() {
@@ -741,11 +1027,29 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.reduce((newObj, currentStar) => {
+      if (!newObj[currentStar.color]) {
+        newObj[currentStar.color] = [];
+      }
+      newObj[currentStar.color].push(currentStar);
+      return newObj;
+    }, {});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects
+    // I want an object with keys equal to star.color
+    // that is assigned an array of objects that have star.color matching obj.key
+
+    // use reduce to create a newObj and iterate through stars
+
+    // use an if statement to create the key:
+    // if object[key] of star.color doesn't exist
+    // make it and assign it an empty array
+
+    // push star into object[star.color]
+    // profit
   },
 
   constellationsStarsExistIn() {
@@ -763,11 +1067,23 @@ const astronomyPrompts = {
     //    "The Little Dipper" ]
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const sorted = stars.sort((a, b) => a.visualMagnitude - b.visualMagnitude);
+
+    const result = sorted.reduce((newArray, currentStar) => {
+      if (currentStar.constellation) {
+        newArray.push(currentStar.constellation);
+      }
+      return newArray;
+    }, []);
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of star objects
+    // and I want an array of ordered star.constellation stings
+    // the order must be in regards to their visualMagnitude
+
+    // use sort
   }
 };
 

@@ -72,7 +72,7 @@ describe("PROTOTYPES", () => {
   });
   
   describe("Club Prompts", () => {
-    it("membersBelongingToClubs", () => {
+    it.only("membersBelongingToClubs", () => {
       const e = clubPrompts.membersBelongingToClubs({
         Louisa: ["Drama", "Art"],
         Pam: ["Drama", "Chess", "Newspaper"],
@@ -649,7 +649,7 @@ describe("PROTOTYPES", () => {
   });
   
   describe("Dinosaur Prompts", () => {
-    it.only("countAwesomeDinosaurs", () => {
+    it("countAwesomeDinosaurs", () => {
       const e = dinosaurPrompts.countAwesomeDinosaurs();
 
       expect(e).to.deep.equal({
