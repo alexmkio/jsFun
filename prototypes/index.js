@@ -27,6 +27,13 @@ const kittyPrompts = {
 
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
+
+    // fara's mentor's solution:
+    // const result = kitties
+    //   .filter(el => el.color === 'orange')
+    //   .map(el => el.name);
+    // return result;
+    
     const result = kitties.reduce((newArray, currentKitten) => {
       if (currentKitten.color === 'orange') {
         newArray.push(currentKitten.name);
@@ -65,6 +72,9 @@ const kittyPrompts = {
     //   color: 'orange'
     // },
     // ...etc]
+
+    // const result = kitties.sort((a, b) => b.age - a.age);
+    // result.forEach(kitty => kitty.age = kitty.age + 2);
 
     const result = kitties.map(currentCat => {
       currentCat.age += 2;
@@ -164,6 +174,14 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
+    // fara's mentor's solution:
+    // const result = mods.map(obj => {
+    //   return {
+    //     mod: obj.mod,
+    //     studentsPerInstructor: obj.students / obj.instructors;
+    //   };
+    // });
+
     const result = mods.map(mod => {
       let newObj = {};
       newObj.mod = mod.mod,
@@ -212,6 +230,14 @@ const cakePrompts = {
     //    { flavor: 'yellow', inStock: 14 },
     //    ..etc
     // ]
+
+    // fara's mentor's solution:
+    // const result = cakes.map(obj => {
+    //   return {
+    //     flavor: obj.cakeFlavor,
+    //     inStock: obj.inStock
+    //   };
+    // });
 
     const result = cakes.map(cake => {
       let newObj = {};
@@ -523,6 +549,11 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
+    // const result = weather.reduce((newArray, town) => {
+    //   newArray.push((town.temperature.high + town.temperature.low) / 2);
+    //   return newArray;
+    // }, []);
+
     const result = weather.map(eachCity => {
       return (eachCity.temperature.high + eachCity.temperature.low) / 2;
     });
@@ -544,6 +575,16 @@ const weatherPrompts = {
     // [ 'Atlanta, Georgia is sunny.',
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
+
+    // fara's mentor's solution:
+    // const result = weather.filter(elem => elem.type.includes('sunny'))
+    //   .map(loc => loc.location + ` is ${loc.type}.`);
+
+    // const result = weather.filter(town => {
+    //   return (town.type === 'sunny' || town.type === 'mostly sunny');
+    // }).map(town => {
+    //   return `${town.location} is ${town.type}.`;
+    // });
 
     const result = weather.filter(currentCity => {
       if (currentCity.type === 'sunny' || currentCity.type === 'mostly sunny') {
@@ -683,6 +724,12 @@ const nationalParksPrompts = {
     // { Utah: 'Zion' },
     // { Florida: 'Everglades' } ]
 
+    // fara's mentor's solution:
+    // const result = nationalParks.map(park => {
+    //   return {
+    //     [park.location]: park.name
+    //   };
+    // });
 
     const result = nationalParks.map(currentPark => {
       let newObj = {};
@@ -722,11 +769,18 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, currentBrewery) => {
+      return acc += currentBrewery.beers.length;
+    }, 0);
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of brewery objects with a nestled array of beer objects
+    // I want a total number of beers
+
+    // use reduce to iterate through breweries and return an accumulator that is a number
+    // use beer.length?
   },
 
   getBreweryBeerCount() {
@@ -738,11 +792,34 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // fara's mentor's solution:
+    // const result = breweries.map(brew => {
+    //   return {
+    //     name: brew.name,
+    //     beerCount: brew.beers.length
+    //   };
+    // });
+
+    const result = breweries.map(brewery => {
+      let newObj = {};
+      newObj.name = brewery.name,
+      newObj.beerCount = brewery.beers.length;
+      return newObj;
+    });
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of brewery objects
+    // I want an arry of the same length
+    // that has two keys
+    // key of name = brewery.name
+    // key of beerCount = brewery.beers.length
+
+    // use map to iterate through breweries
+    // let a new object
+    // create keys and assignments
+    // return object
   },
 
   findHighestAbvBeer() {
@@ -750,11 +827,16 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.map(brew => brew.beers.sort((a, b) => b.abv - a.abv)[0])
+      .sort((a, b) => b.abv - a.abv)[0];
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of brewery objects with a nestled array of beer objects
+    // I want one beer object returned. The one that has the highest abv of all beers at all breweries
+
+    // chain a sort with[0]
   }
 };
 
