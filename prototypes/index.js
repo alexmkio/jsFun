@@ -164,11 +164,25 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.map(mod => {
+      let newObj = {};
+      newObj.mod = mod.mod,
+      newObj.studentsPerInstructor = (mod.students / mod.instructors);
+      return newObj;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects
+    // I want an array of objects
+    // the new array has a different 2nd key and no 3rd key
+
+    // use map to iterate through mods
+    // let a new object
+    // declare an object.key of mod and assign the value of mod.mod
+    // declare an object.key of studentsPerInstructor and
+    // assign it a value of mod.instructors / mod.students
   }
 };
 
@@ -199,11 +213,25 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map(cake => {
+      let newObj = {};
+      newObj.flavor = cake.cakeFlavor,
+      newObj.inStock = cake.inStock;
+      return newObj;
+    });
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of cake objects
+    // I want an array of objects
+
+    // use map to iterate through cakes
+    // let a new empty object
+    // create a key of flavor and assign cake.cakeFlavor to it
+    // create a key of inStock and assign cake.inStock to it
+    // return said object
+
   },
 
   onlyInStock() {
@@ -227,22 +255,34 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter(cake => (cake.inStock));
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of cake objects
+    // and I want an array of only the cake objects that are in stock
+
+    // use filter
   },
 
   totalInventory() {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, currentCake) => {
+      return acc += currentCake.inStock;
+    }, 0);
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of cake objects
+    // I want to return an accumulated number
+
+    // use reduce to iterate through cakes
+    // and add each cake.inStock value to the acc
+    // return the acc
   },
 
   allToppings() {
@@ -250,11 +290,25 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((newArray, currentCake) => {
+      currentCake.toppings.forEach(topping => {
+        if (!newArray.includes(topping)) {
+          newArray.push(topping);
+        }
+      });
+      return newArray;
+    }, []);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects with a nested toppings array
+    // I want an array of unique topping strings
+    // use reduce to iterate through cakes and instantiate an empty array
+    // use forEach to iterate through toppings
+    // if() newArray doesn't include topping
+    // push it into the newArray
+    // return array
   },
 
   groceryList() {
@@ -268,11 +322,32 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((newObj, currentCake) => {
+      currentCake.toppings.forEach(topping => {
+        if (!newObj[topping]) {
+          newObj[topping] = 1;
+        } else {
+          newObj[topping]++;
+        }
+      });
+      return newObj;
+    }, {});
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of cake objects
+    // I want an object
+    // with key.names === cake.cakeFlavor
+    // assigned a number that represent how many total times they show up across all cakes
+
+    // use reduce to iterate through cakes and instantiate an empty object
+
+    // use forEach to iterate through cake.toppings
+    // if () object[topping] doesn't exist
+    // make it and assign it a value of 1
+
+    // if it does (else) exist increment it's value by 1
   }
 };
 
