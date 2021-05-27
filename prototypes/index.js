@@ -491,12 +491,12 @@ const bookPrompts = {
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
     const result = books.filter(book => book.published >= 1990 && book.published < 2010)
-    .map(book => {
-      let rObj = {};
-      rObj.title = book.title;
-      rObj.year = book.published;
-      return rObj;
-    });
+      .map(book => {
+        let rObj = {};
+        rObj.title = book.title;
+        rObj.year = book.published;
+        return rObj;
+      });
     
     return result;
 
@@ -523,11 +523,19 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.map(eachCity => {
+      return (eachCity.temperature.high + eachCity.temperature.low) / 2;
+    });
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects
+    // I want an array of numbers
+    // that are averages of two numbers found in each object
+
+    // use map to iterate through weather and return an array
+    // add the two numbers up and divide by two
   },
 
   findSunnySpots() {
@@ -537,11 +545,23 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.filter(currentCity => {
+      if (currentCity.type === 'sunny' || currentCity.type === 'mostly sunny') {
+        return currentCity;
+      }
+    }).map(currentCity => `${currentCity.location} is ${currentCity.type}.`);
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of weather objects
+    // I want an array of strings
+    // of only the city.names and city.type interpolated
+    // for only those cities that have a type of sunny or mostly sunny
+
+    // use filter to iterate through weather and return an array
+    // of only the objects I'm looking for
+    // and then use map to return just the interpolated string
   },
 
   findHighestHumidity() {
@@ -553,11 +573,16 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.sort((a, b) => b.humidity - a.humidity)[0];
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects
+    // I want just one object
+    // the one with the highest object.humidity
+    // can sort[0] do this?
+    // sort descending so [0] is highest humidity
 
   }
 };
