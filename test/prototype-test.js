@@ -276,7 +276,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("Book prompts", () => {
-    it.only("removeViolence", () => {
+    it("removeViolence", () => {
       const e = bookPrompts.removeViolence();
 
       expect(e).to.deep.equal(['1984',
@@ -307,7 +307,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("Weather prompts", () => {
-    it("getAverageTemps", () => {
+    it.only("getAverageTemps", () => {
       const e = weatherPrompts.getAverageTemps();
 
       expect(e).to.deep.equal([

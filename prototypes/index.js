@@ -398,7 +398,7 @@ const classPrompts = {
     // }
 
     const result = classrooms.reduce((newObj, currentClassroom) => {
-      if ((!newObj.feCapacity) && (!newObj.beCapacity)) {
+      if (!newObj.feCapacity && !newObj.beCapacity) {
         newObj.feCapacity = 0,
         newObj.beCapacity = 0;
       }
@@ -462,11 +462,24 @@ const bookPrompts = {
     //   'Catch-22', 'Treasure Island']
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.reduce((newArray, currentBook) => {
+      if (currentBook.genre !== 'Horror' && currentBook.genre !== 'True Crime') {
+        newArray.push(currentBook.title);
+      }
+      return newArray;
+    }, []);
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects
+    // I want an array of strings (from book.title)
+    // of all that aren't horror or true crime
+
+    // use reduce to iterate through books and instantiate an empty array
+    // if() book.genre isn't horror or true crime
+    // push book.title into array
+    // return array
 
   },
   getNewBooks() {
@@ -477,11 +490,21 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.filter(book => book.published >= 1990 && book.published < 2010)
+    .map(book => {
+      let rObj = {};
+      rObj.title = book.title;
+      rObj.year = book.published;
+      return rObj;
+    });
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects
+    // and I want to return an array of the same objects but fewer
+    // use filter to select just those books
+    // that have book.published between 1990 and 2009
   }
 
 };
