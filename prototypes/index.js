@@ -378,11 +378,15 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter(classroom => classroom.program === 'FE');
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects
+    // I want an array of those same objects
+    // but only the ones that have object.program=FE
+    // use filter
   },
 
   totalCapacities() {
@@ -393,21 +397,49 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.reduce((newObj, currentClassroom) => {
+      if ((!newObj.feCapacity) && (!newObj.beCapacity)) {
+        newObj.feCapacity = 0,
+        newObj.beCapacity = 0;
+      }
+      if (currentClassroom.program === 'FE') {
+        newObj.feCapacity += currentClassroom.capacity;
+      } else {
+        newObj.beCapacity += currentClassroom.capacity;
+      }
+      return newObj;
+    }, {});
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of classroom objects
+    // I want an object
+    // with two keys (feCapacity and beCapacity) that total up
+    // their respective classroom.capacity
+
+    // use reduce to iterate through classrooms and instantiate an empty object
+    // create keys and assign a value of 0 to them
+
+    // if() classroom.program === 'FE'
+    // then feCapacity += classroom.capacity
+
+    // else beCapacity += classroom.capacity
+
+    //return object
   },
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => a.capacity - b.capacity);
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have an array of objects and
+    // I want to return an array of the same objects
+    // use sort to sort classroom.capacity in ascending order
   }
 };
 
